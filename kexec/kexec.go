@@ -4,11 +4,17 @@ package kexec
 
 import (
 	"fmt"
+	"golang.org/x/sys/unix"
 	"syscall"
 	"unsafe"
 )
 
 const SYS_KEXEC_LOAD_FILE = uintptr(294)
+const RB_KEXEC = 0x45584543
+
+func Boot() error {
+	return unix.Reboot(RB_KEXEC)
+}
 
 func LoadFile(kernel_fd, initrd_fd uintptr, cmdline string) error {
 	var cmdlineBytes []byte
