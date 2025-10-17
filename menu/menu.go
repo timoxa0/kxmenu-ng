@@ -75,7 +75,7 @@ func NewBootMenu(title string, timeout int, entries []*entry.BootEntry, inputMgr
 	c := collate.New(language.English, collate.IgnoreCase, collate.Numeric)
 
 	sort.Slice(menu.Items, func(i, j int) bool {
-		return c.CompareString(strings.ToLower(menu.Items[i].Entry.Filename), strings.ToLower(menu.Items[j].Entry.Filename)) < 0
+		return c.CompareString(strings.ToLower(menu.Items[i].Entry.Filename), strings.ToLower(menu.Items[j].Entry.Filename)) > 0
 	})
 
 	return menu
@@ -209,7 +209,7 @@ func (m *BootMenu) drawMenu() {
 	// Calculate menu dimensions
 	menuItemsHeight := len(m.Items)
 	titleHeight := 3      // title + separator + blank line
-	bottomInfoHeight := 4 // info panel + controls
+	bottomInfoHeight := 6 // info panel + controls
 	totalMenuHeight := titleHeight + menuItemsHeight + bottomInfoHeight
 
 	// Calculate vertical centering
